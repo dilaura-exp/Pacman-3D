@@ -3,6 +3,7 @@
 #include <SDL/SDL.h>
 #include <GL/glew.h>
 
+#include "Pathfinding.h"
 #include "IOManager.h"
 
 enum class GameState{PLAY, EXIT};
@@ -22,6 +23,8 @@ private:
 
 	Uint32 oldTime, currentTime;
 	float deltaTime;
+
+	Grid *grid;
 
 	void initSystems();
 	void initGameObjects();

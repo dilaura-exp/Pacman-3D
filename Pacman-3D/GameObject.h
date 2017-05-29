@@ -63,23 +63,17 @@ struct Vector3 {
 	Vector3 getNormalized() {
 		return Vector3(*this / getNorm());
 	}
-};
-
-class Collision {
-public:
-	Collision() {}
-	Collision(Vector3 midPoint, Vector3 collidedPosition, float distance)	{
-		this->midPoint = midPoint;
-		this->collidedPosition = collidedPosition;
-		this->distance = distance;
+	static float distance(Vector3 &a, Vector3 &b) {
+		return sqrt(pow(a.x - b.x, 2) + pow(a.y - b.y, 2) + pow(a.z - b.z, 2));
 	}
-	~Collision() {
-
+	static Vector3 moveTowards(Vector3 &current, Vector3 &target, float maxDistanceDelta) {
+		Vector3 a = target - current;
+		float magnitude = sqrt(a.x*a.x + a.y*a.y + a.z*a.z);
+		if (magnitude <= maxDistanceDelta || magnitude == 0.0f) {
+			return target;
+		}
+		return current + a / magnitude * maxDistanceDelta;
 	}
-
-	Vector3 midPoint;
-	Vector3 collidedPosition;
-	float distance;
 };
 
 class GameObject {
@@ -99,7 +93,6 @@ public:
 	virtual void update(float deltaTime);
 	virtual void draw();
 	virtual void input(SDL_Event &evnt);
-	virtual void onCollision(Collision &collision);
 
 	void translate(const Vector3 &translation);
 };

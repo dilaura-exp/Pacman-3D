@@ -43,7 +43,7 @@ void MainGame::initSystems() {
 		logFatalError("glew could not be initialized.");
 	}
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-	glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
+	glClearColor(0, 0, 0, 1.0f);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	gluPerspective(45, (GLdouble)screenWidth / (GLdouble)screenHeight, 1.0, 1000.0);
@@ -71,7 +71,9 @@ void MainGame::initSystems() {
 }
 
 void MainGame::initGameObjects() {
-	
+	grid = new Grid();
+	grid->init(Vector3(10, 5, 10), 0.5f);
+	Pathfinding::getInstance().init(grid);
 }
 
 void MainGame::gameLoop() {
@@ -105,23 +107,11 @@ void MainGame::drawGame() {
 	float pos[] = { -2.0, 2.0, -3.0, 1.0 };
 	glLightfv(GL_LIGHT0, GL_POSITION, pos);
 
-	glTranslatef(0.0, 0.0, -20);
-	glRotatef(45, 1.0, 0, 0);
+	glTranslatef(-6.5, -1.5, -10);
+	glRotatef(20, 1, 0, 0);
+	glRotatef(45, 0, 1, 0);
 
-	/*angle += (30.0f*deltaTime);
-	if (angle >= 360.0f) angle = 0.0f;
-	
-	glBindTexture(GL_TEXTURE_2D, texture.id);
-	glBegin(GL_QUADS);
-		glTexCoord2f(0.0, 1.0);
-		glVertex3f(-2.0, 2.0, 0.0);
-		glTexCoord2f(0.0, 0.0);
-		glVertex3f(-2.0, -2.0, 0.0);
-		glTexCoord2f(1.0, 0.0);
-		glVertex3f(2.0, -2.0, 0.0);
-		glTexCoord2f(1.0, 1.0);
-		glVertex3f(2.0, 2.0, 0.0);
-	glEnd();*/
+	grid->draw();
 
 	SDL_GL_SwapWindow(window);
 }
