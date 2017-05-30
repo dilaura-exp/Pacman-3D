@@ -1,6 +1,7 @@
 #pragma once
 #include "GameObject.h"
 #include "Pathfinding.h"
+#include "Pacman.h"
 #include <vector>
 
 using namespace std;
@@ -11,12 +12,13 @@ public:
 	~Unit();
 
 	void init();
-	void update(float deltaTime);
+	void walkPath(float deltaTime);
 
-private:
-	GameObject target;
+protected:
+	Pacman *target;
 	float speed;
 
+	Node *currentNode;
 	vector<Node*> path;
 	int targetIndex;
 	

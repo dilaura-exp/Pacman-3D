@@ -30,7 +30,7 @@ public:
 	~Pathfinding();
 
 	void init(Grid *grid);
-	static vector<Node*> findPath(Vector3 startPos, Vector3 targetPos);
+	static vector<Node*> findPath(Node *startNode, Node *targetNode);
 
 private:
 	static vector<Node*> makePath(Node *startNode, Node *targetNode);

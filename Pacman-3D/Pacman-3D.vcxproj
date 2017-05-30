@@ -123,6 +123,7 @@
   <ItemGroup>
     <ClCompile Include="ErrorLog.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Ghost.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="ImageLoader.cpp" />
     <ClCompile Include="IOManager.cpp" />
@@ -131,6 +132,7 @@
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="NodeHeap.cpp" />
     <ClCompile Include="ObjectLoader.cpp" />
+    <ClCompile Include="Pacman.cpp" />
     <ClCompile Include="Pathfinding.cpp" />
     <ClCompile Include="picoPNG.cpp" />
     <ClCompile Include="Unit.cpp" />
@@ -138,6 +140,7 @@
   <ItemGroup>
     <ClInclude Include="ErrorLog.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="Ghost.h" />
     <ClInclude Include="GLTexture.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="ImageLoader.h" />
@@ -146,6 +149,7 @@
     <ClInclude Include="Node.h" />
     <ClInclude Include="NodeHeap.h" />
     <ClInclude Include="ObjectLoader.h" />
+    <ClInclude Include="Pacman.h" />
     <ClInclude Include="Pathfinding.h" />
     <ClInclude Include="picoPNG.h" />
     <ClInclude Include="Unit.h" />

@@ -1,6 +1,7 @@
 #include "Pathfinding.h"
+#include <iostream>
 
-
+using namespace std;
 
 Pathfinding &Pathfinding::getInstance() {
 	static Pathfinding instance;
@@ -14,14 +15,13 @@ void Pathfinding::init(Grid *grid) {
 	this->grid = grid;
 }
 
-vector<Node*> Pathfinding::findPath(Vector3 startPos, Vector3 targetPos) {
+vector<Node*> Pathfinding::findPath(Node *startNode, Node *targetNode) {
 	bool success = false;
 	vector<Node*> wayPoints;
 
-	Node *startNode = getInstance().grid->nodeFromWorldPoint(startPos);
-	Node *targetNode = getInstance().grid->nodeFromWorldPoint(targetPos);
+	cout << "TARGET: " << targetNode->gridX << " " << targetNode->gridY << " " << targetNode->gridZ << endl;
 
-	if (targetNode->walkable) {
+	if (true) {
 		NodeHeap openSet(getInstance().grid->getMaxSize());
 		unordered_set<Node*> closedSet;
 
@@ -58,6 +58,11 @@ vector<Node*> Pathfinding::findPath(Vector3 startPos, Vector3 targetPos) {
 	if (success) {
 		wayPoints = makePath(startNode, targetNode);
 	}
+	cout << endl;
+	for (int i = 0; i < wayPoints.size(); i++) {
+		cout << wayPoints[i]->gridX << " " << wayPoints[i]->gridY << " " << wayPoints[i]->gridZ << endl;
+	}
+	cout << endl;
 	return wayPoints;
 }
 

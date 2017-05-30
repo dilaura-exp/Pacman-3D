@@ -18,6 +18,8 @@ public:
 	int gCost, hCost;
 
 	Node *parent;
+	bool obstacle;
+	int stairType;	//0 if not stair
 
 private:
 	int heapIndex;

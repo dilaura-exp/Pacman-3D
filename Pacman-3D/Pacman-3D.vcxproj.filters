@@ -21,7 +21,15 @@
     <ClCompile Include="Grid.cpp">
       <Filter>Astar</Filter>
     </ClCompile>
-    <ClCompile Include="Unit.cpp" />
+    <ClCompile Include="Pacman.cpp">
+      <Filter>Units</Filter>
+    </ClCompile>
+    <ClCompile Include="Ghost.cpp">
+      <Filter>Units</Filter>
+    </ClCompile>
+    <ClCompile Include="Unit.cpp">
+      <Filter>Units</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ErrorLog.h" />
@@ -44,11 +52,22 @@
     <ClInclude Include="Grid.h">
       <Filter>Astar</Filter>
     </ClInclude>
-    <ClInclude Include="Unit.h" />
+    <ClInclude Include="Pacman.h">
+      <Filter>Units</Filter>
+    </ClInclude>
+    <ClInclude Include="Ghost.h">
+      <Filter>Units</Filter>
+    </ClInclude>
+    <ClInclude Include="Unit.h">
+      <Filter>Units</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Astar">
       <UniqueIdentifier>{c2106703-9822-44d1-9e7a-fbefb88e3ca2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Units">
+      <UniqueIdentifier>{475a14d5-3149-4121-9c55-22637a645bd0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

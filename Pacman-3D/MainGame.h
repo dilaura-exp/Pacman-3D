@@ -2,11 +2,16 @@
 
 #include <SDL/SDL.h>
 #include <GL/glew.h>
+#include <vector>
 
 #include "Pathfinding.h"
 #include "IOManager.h"
+#include "Pacman.h"
+#include "Ghost.h"
 
 enum class GameState{PLAY, EXIT};
+
+class Grid;
 
 class MainGame {
 public:
@@ -25,6 +30,8 @@ private:
 	float deltaTime;
 
 	Grid *grid;
+	Pacman *pacman;
+	std::vector<Ghost*> ghosts;
 
 	void initSystems();
 	void initGameObjects();

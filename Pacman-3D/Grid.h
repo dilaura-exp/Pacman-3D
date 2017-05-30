@@ -2,6 +2,8 @@
 #include "GameObject.h"
 #include "Node.h"
 #include <vector>
+#include <fstream>
+#include "ErrorLog.h"
 
 using namespace std;
 
@@ -10,9 +12,9 @@ public:
 	Grid();
 	~Grid();
 	
-	void init(Vector3 gridWorldSize, float nodeRadius);
-	void draw();
-	void loadLevel(string level);
+	void init(float nodeRadius);
+	void draw(int currentY);
+	void loadLevel(const char* filePath);
 	Node ****getNodes();
 	void setNodes(int i, int j, int k, Node *node);
 	int getSizeX();
@@ -23,9 +25,10 @@ public:
 	Node *nodeFromWorldPoint(Vector3 worldPosition);
 
 private:
-	void createGrid();
 	void drawBottomPlane(float radius, float material[]);
 	void drawCube(float radius, float material[]);
+	void drawHalfCube(float radius, float material[]);
+	void drawLadder(float radius, float material[]);
 
 	Vector3 gridWorldSize;
 	float nodeRadius;

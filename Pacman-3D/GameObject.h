@@ -22,6 +22,9 @@ struct Vector3 {
 		this->z = z;
 	}
 
+	bool operator == (const Vector3 &vectorb) {
+		return (x == vectorb.x && y == vectorb.y && z == vectorb.z);
+	}
 	Vector3 operator * (const float multiplier) {
 		Vector3 newVector(x, y, z);
 		newVector.x *= multiplier;
