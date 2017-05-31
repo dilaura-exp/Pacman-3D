@@ -29,5 +29,7 @@ private:
 	int downInput, upInput;
 	int horizontalInput;
 	int verticalInput;
+	bool ladderInput;
+	int ladderDirection;
 };
 

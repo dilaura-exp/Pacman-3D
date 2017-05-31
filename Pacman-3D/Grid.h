@@ -13,7 +13,7 @@ public:
 	~Grid();
 	
 	void init(float nodeRadius);
-	void draw(int currentY);
+	void draw();
 	void loadLevel(const char* filePath);
 	Node ****getNodes();
 	void setNodes(int i, int j, int k, Node *node);
@@ -21,6 +21,8 @@ public:
 	int getSizeY();
 	int getSizeZ();
 	int getMaxSize();
+	int getCurrentHeight();
+	void setCurrentHeight(int value);
 	vector<Node*> getNeighbours(Node *node);
 	Node *nodeFromWorldPoint(Vector3 worldPosition);
 
@@ -35,5 +37,6 @@ private:
 	Node ****nodes;
 	float nodeDiameter;
 	int gridSizeX, gridSizeY, gridSizeZ;
+	int currentHeight;
 };
 

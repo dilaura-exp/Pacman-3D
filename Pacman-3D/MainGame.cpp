@@ -131,11 +131,11 @@ void MainGame::drawGame() {
 	glRotatef(45, 1, 0, 0);
 	glRotatef(45, 0, 1, 0);
 
-	grid->draw(8);
-	pacman->draw();
 	for (int i = 0; i < ghosts.size(); i++) {
 		ghosts[i]->draw();
 	}
+	pacman->draw();
+	grid->draw();
 
 	SDL_GL_SwapWindow(window);
 }

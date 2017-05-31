@@ -27,13 +27,14 @@ for (int j = 0; j < gridSizeY; j++) {
 for (int k = 0; k < gridSizeZ; k++) {
 */
 
-void Grid::draw(int currentY) {
+void Grid::draw() {
 	glLineWidth(1.5);
 	for (int i = gridSizeX - 1; i >= 0; i--) {
 		for (int j = gridSizeY - 1; j >= 0; j--) {
-			for (int k = gridSizeZ - 1; k >= 0; k--) {
-				float alpha = (j > currentY) ? 0.15 : 0.75f;
-				glPushMatrix();
+			//if (j <= currentHeight+1) {
+				for (int k = gridSizeZ - 1; k >= 0; k--) {
+					float alpha = (j > currentHeight) ? 0.15 : 0.75f;
+					glPushMatrix();
 					glTranslatef(nodes[i][j][k]->worldPosition->x, nodes[i][j][k]->worldPosition->y, nodes[i][j][k]->worldPosition->z);
 					if (nodes[i][j][k]->walkable) {
 						if (nodes[i][j][k]->stairType == 1) {
@@ -41,8 +42,8 @@ void Grid::draw(int currentY) {
 							drawLadder(nodeRadius, ambdiv);
 						}
 						else if (nodes[i][j][k]->stairType == 2) {
-							float ambdiv[]{ 0.5f, 0.75f, 0.75f, alpha };
-							drawBottomPlane(nodeRadius, ambdiv);
+							/*float ambdiv[]{ 0.5f, 0.75f, 0.75f, alpha };
+							drawBottomPlane(nodeRadius, ambdiv);*/
 						}
 						else {
 							float ambdiv[]{ 0.25f, 0.25f, 0.75f, alpha };
@@ -55,7 +56,8 @@ void Grid::draw(int currentY) {
 							drawHalfCube(nodeRadius, ambdiv);
 						}
 					}
-				glPopMatrix();
+					glPopMatrix();
+				//}
 			}
 		}
 	}
@@ -293,6 +295,14 @@ int Grid::getSizeZ() {
 
 int Grid::getMaxSize() {
 	return gridSizeX * gridSizeY * gridSizeZ;
+}
+
+int Grid::getCurrentHeight() {
+	return currentHeight;
+}
+
+void Grid::setCurrentHeight(int value) {
+	currentHeight = value;
 }
 
 vector<Node*> Grid::getNeighbours(Node *node) {

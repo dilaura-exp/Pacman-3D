@@ -19,8 +19,6 @@ vector<Node*> Pathfinding::findPath(Node *startNode, Node *targetNode) {
 	bool success = false;
 	vector<Node*> wayPoints;
 
-	cout << "TARGET: " << targetNode->gridX << " " << targetNode->gridY << " " << targetNode->gridZ << endl;
-
 	if (true) {
 		NodeHeap openSet(getInstance().grid->getMaxSize());
 		unordered_set<Node*> closedSet;
@@ -58,11 +56,6 @@ vector<Node*> Pathfinding::findPath(Node *startNode, Node *targetNode) {
 	if (success) {
 		wayPoints = makePath(startNode, targetNode);
 	}
-	cout << endl;
-	for (int i = 0; i < wayPoints.size(); i++) {
-		cout << wayPoints[i]->gridX << " " << wayPoints[i]->gridY << " " << wayPoints[i]->gridZ << endl;
-	}
-	cout << endl;
 	return wayPoints;
 }
 
