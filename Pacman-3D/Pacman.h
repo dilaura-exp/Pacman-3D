@@ -1,6 +1,11 @@
 #pragma once
 #include "GameObject.h"
-#include "Pathfinding.h"
+#include "Pathfinding.h" 
+#include <SDL\SDL_mixer.h>
+
+enum WalkDirection {
+	STAY = 0, UP, DOWN, LEFT, RIGHT
+};
 
 class Pacman : public GameObject {
 public:
@@ -22,14 +27,15 @@ private:
 	int models[2];
 	int currentModel;
 	Node *currentNode;
+	Node *lastVisitedNode;
 
 	float animationDelay;
 
-	int leftInput, rightInput;
-	int downInput, upInput;
-	int horizontalInput;
-	int verticalInput;
+	WalkDirection walkDirection;
+	WalkDirection nextDirection;
 	bool ladderInput;
 	int ladderDirection;
+
+	Mix_Chunk *sound;
 };
 

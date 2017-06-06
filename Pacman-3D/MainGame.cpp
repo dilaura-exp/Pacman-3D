@@ -7,13 +7,9 @@
 #include <iostream>
 #include <vector>
 
-MainGame::MainGame() {
-	screenWidth = 1366;
-	screenHeight = 768;
-	window = nullptr;
-	gameState = GameState::PLAY;
-	currentTime = SDL_GetTicks();
-	deltaTime = 0;
+MainGame &MainGame::getInstance() {
+	static MainGame instance;
+	return instance;
 }
 
 MainGame::~MainGame() {
@@ -29,6 +25,13 @@ GLTexture texture;
 int cube;
 
 void MainGame::initSystems() {
+	screenWidth = 1366;
+	screenHeight = 768;
+	window = nullptr;
+	gameState = GameState::PLAY;
+	currentTime = SDL_GetTicks();
+	deltaTime = 0;
+
 	SDL_Init(SDL_INIT_EVERYTHING);
 	window = SDL_CreateWindow("FPS Space Shooter", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, screenWidth, screenHeight, SDL_WINDOW_OPENGL);
 	if (window == nullptr) {
@@ -37,6 +40,9 @@ void MainGame::initSystems() {
 	SDL_GLContext glContext = SDL_GL_CreateContext(window);
 	if (glContext == nullptr) {
 		logFatalError("SDL GL Context could not be created.");
+	}
+	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) { 
+		printf("SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError()); 
 	}
 	GLenum glStatus = glewInit();
 	if (glStatus != GLEW_OK) {

@@ -23,6 +23,7 @@ loop
 #include "Grid.h"
 #include "NodeHeap.h"
 #include <unordered_set>
+#include <list>
 
 class Pathfinding {
 public:

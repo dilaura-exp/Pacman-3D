@@ -17,7 +17,7 @@ void Ghost::init(Grid *grid, float *material) {
 	findPathDelay = 0.2f;
 	targetIndex = 0;
 	*scale = Vector3(0.5f, 0.5f, 0.5f);
-	speed = 1.5f;
+	speed = 2.0f;
 }
 
 void Ghost::initNode(Node *node) {

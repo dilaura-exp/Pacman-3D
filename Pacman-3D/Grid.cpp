@@ -1,5 +1,6 @@
 #include "Grid.h"
 #include <iostream>
+#include "ObjectLoader.h"
 
 using namespace std;
 
@@ -13,6 +14,7 @@ void Grid::init(float nodeRadius) {
 	this->nodeRadius = nodeRadius;
 	nodeDiameter = nodeRadius * 2;
 	loadLevel("Level.txt");
+	sphereModel = ObjectLoader::loadWavefront("pacman2.obj");
 }
 
 /*
@@ -55,6 +57,13 @@ void Grid::draw() {
 							float ambdiv[]{ 0.75f, 0.25f, 0.25f, alpha };
 							drawHalfCube(nodeRadius, ambdiv);
 						}
+					}
+					glColor4f(0.9, 0.9, 0.9, alpha);
+					if (nodes[i][j][k]->item == 1) {
+						glPushMatrix();
+							glScalef(0.1, 0.1, 0.1);
+							glCallList(sphereModel);
+						glPopMatrix();
 					}
 					glPopMatrix();
 				//}
@@ -251,22 +260,28 @@ void Grid::loadLevel(const char* filePath) {
 				bool walkable = true;
 				int stairType = 0;
 				bool obstacle = false;
+				int item = 1;
 				if (temp[x] == 'x') {
 					walkable = false;
 					obstacle = true;
+					item = 0;
 				}
 				else if (temp[x] == '-') {
 					walkable = false;
+					item = 0;
 				}
 				else if (temp[x] == 'H') {
 					stairType = 1;
+					item = 0;
 				} 
 				else if (temp[x] == 'h') {
 					stairType = 2;
+					item = 0;
 				}
 				nodes[x][y][z] = new Node(walkable, worldPoint, x, y, z);
 				nodes[x][y][z]->stairType = stairType;
 				nodes[x][y][z]->obstacle = obstacle;
+				nodes[x][y][z]->item = item;
 			}
 			z++;
 		}

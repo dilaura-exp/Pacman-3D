@@ -9,13 +9,14 @@
 #include "Pacman.h"
 #include "Ghost.h"
 
-enum class GameState{PLAY, EXIT};
+enum class GameState{PLAY, GAME_OVER, EXIT};
 
 class Grid;
 
 class MainGame {
 public:
-	MainGame();
+
+	static MainGame &getInstance();
 	~MainGame();
 
 	void run();

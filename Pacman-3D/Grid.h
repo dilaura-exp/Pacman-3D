@@ -38,5 +38,7 @@ private:
 	float nodeDiameter;
 	int gridSizeX, gridSizeY, gridSizeZ;
 	int currentHeight;
+
+	int sphereModel;
 };
 

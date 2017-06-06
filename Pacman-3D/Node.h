@@ -20,6 +20,7 @@ public:
 	Node *parent;
 	bool obstacle;
 	int stairType;	//0 if not stair
+	int item; //0 empty, 1 point, 2 cherry
 
 private:
 	int heapIndex;
