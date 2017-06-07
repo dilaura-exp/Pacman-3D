@@ -16,6 +16,7 @@ public:
 	void update(float deltaTime);
 	void draw();
 	void input(SDL_Event &evnt);
+	void die();
 
 	Node *getCurrentNode();
 
@@ -37,5 +38,6 @@ private:
 	int ladderDirection;
 
 	Mix_Chunk *sound;
+	Mix_Chunk *deathSound;
 };
 

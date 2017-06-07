@@ -25,8 +25,5 @@ void Unit::walkPath(float deltaTime) {
 		if (path.size() > 1) {
 			*position = Vector3::moveTowards(*position, *currentNode->worldPosition, speed * deltaTime);
 		}
-		else if (path.size() == 1) {
-			*position = Vector3::moveTowards(*position, *target->position, speed * deltaTime);
-		}
 	}
 }

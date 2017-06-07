@@ -4,6 +4,7 @@
 #include <GL/glew.h>
 #include <vector>
 
+#include <SDL\SDL_mixer.h>
 #include "Pathfinding.h"
 #include "IOManager.h"
 #include "Pacman.h"
@@ -39,5 +40,7 @@ private:
 	void gameLoop();
 	void processInput();
 	void drawGame();
+
+	Mix_Chunk *introSound;
 };
 

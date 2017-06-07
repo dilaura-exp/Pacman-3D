@@ -1,6 +1,7 @@
 #include "Pacman.h"
 #include "ObjectLoader.h"
 #include <iostream>
+#include "MainGame.h"
 
 using namespace std;
 
@@ -14,8 +15,8 @@ Pacman::~Pacman() {
 
 void Pacman::init(Grid *grid) {
 	this->grid = grid;
-	models[0] = ObjectLoader::loadWavefront("pacman1.obj");
-	models[1] = ObjectLoader::loadWavefront("pacman2.obj");
+	models[0] = ObjectLoader::loadWavefront("Models/pacman1.obj");
+	models[1] = ObjectLoader::loadWavefront("Models/pacman2.obj");
 	currentModel = 0;
 	animationDelay = 0.2f;
 	currentNode = grid->getNodes()[5][8][8];
@@ -25,7 +26,8 @@ void Pacman::init(Grid *grid) {
 	speed = 2.0f;
 	ladderDirection = 0;
 	grid->setCurrentHeight(currentNode->gridY);
-	sound = Mix_LoadWAV("Audios/pacman_chomp.wav"); 
+	sound = Mix_LoadWAV("Audios/pacman_chomp.wav");
+	deathSound = Mix_LoadWAV("Audios/pacman_death.wav");
 	if (sound == NULL) { 
 		printf("Failed to load high sound effect! SDL_mixer Error: %s\n", Mix_GetError()); 
 	}
@@ -236,6 +238,13 @@ void Pacman::move(float deltaTime) {
 			}
 		}
 	}
+}
+
+void Pacman::die() {
+	Mix_PlayChannel(-1, deathSound, 0);
+	SDL_Delay(2000);
+	(&MainGame::getInstance())->~MainGame();
+	MainGame::getInstance().run();
 }
 
 Node *Pacman::getCurrentNode() {

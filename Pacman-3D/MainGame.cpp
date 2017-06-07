@@ -77,28 +77,85 @@ void MainGame::initSystems() {
 }
 
 void MainGame::initGameObjects() {
+	introSound = Mix_LoadWAV("Audios/pacman_beginning.wav");
 	grid = new Grid();
 	grid->init(0.5f);
 	Pathfinding::getInstance().init(grid);
 	pacman = new Pacman();
 	pacman->init(grid);
 
-	float **materials = new float*[3];
+	float **materials = new float*[6];
 	materials[0] = new float[4]{ 0.8f, 0.5f, 0.5f, 1 };
 	materials[1] = new float[4]{ 0.5f, 0.8f, 0.5f, 1 };
 	materials[2] = new float[4]{ 0.8f, 0.5f, 0.8f, 1 };
+	materials[3] = new float[4]{ 0.25f, 0.75f, 0.25f, 1 };
+	materials[4] = new float[4]{ 0.75f, 0.25f, 0.25f, 1 };
+	materials[5] = new float[4]{ 0.25f, 0.25f, 0.75f, 1 };
 
-	for (int i = 0; i < 3; i++) {
+	for (int i = 0; i < 6; i++) {
 		ghosts.push_back(new Ghost());
 		ghosts[i]->init(grid, materials[i]);
 		ghosts[i]->setTarget(pacman);
 	}
 	ghosts[0]->initNode(grid->getNodes()[5][8][5]);
-	ghosts[1]->initNode(grid->getNodes()[4][8][6]);
-	ghosts[2]->initNode(grid->getNodes()[6][8][6]);
+	ghosts[1]->initNode(grid->getNodes()[4][8][5]);
+	ghosts[2]->initNode(grid->getNodes()[6][8][5]);
+	ghosts[3]->initNode(grid->getNodes()[5][8][6]);
+	ghosts[4]->initNode(grid->getNodes()[4][8][6]);
+	ghosts[5]->initNode(grid->getNodes()[6][8][6]);
+
+	ghosts[0]->initPatrol(vector<Node*> {
+		grid->getNodes()[0][8][0],
+		grid->getNodes()[4][8][0],
+		grid->getNodes()[4][8][3],
+		grid->getNodes()[2][8][8],
+		grid->getNodes()[5][8][8],
+		grid->getNodes()[5][8][10],
+		grid->getNodes()[0][8][10],
+	});
+	ghosts[1]->initPatrol(vector<Node*> {
+		grid->getNodes()[10][8][0],
+		grid->getNodes()[6][8][0],
+		grid->getNodes()[6][8][3],
+		grid->getNodes()[8][8][8],
+		grid->getNodes()[5][8][8],
+		grid->getNodes()[5][8][10],
+		grid->getNodes()[10][8][10],
+	});
+	ghosts[2]->initPatrol(vector<Node*> {
+		grid->getNodes()[0][4][1],
+		grid->getNodes()[0][4][10],
+		grid->getNodes()[2][4][10],
+		grid->getNodes()[2][4][1],
+		grid->getNodes()[4][4][1],
+		grid->getNodes()[4][4][10],
+	});
+	ghosts[3]->initPatrol(vector<Node*> {
+		grid->getNodes()[10][4][1],
+		grid->getNodes()[10][4][10],
+		grid->getNodes()[8][4][10],
+		grid->getNodes()[8][4][1],
+		grid->getNodes()[6][4][1],
+		grid->getNodes()[6][4][10],
+	});
+	ghosts[4]->initPatrol(vector<Node*> {
+		grid->getNodes()[0][0][1],
+			grid->getNodes()[0][0][10],
+			grid->getNodes()[2][0][10],
+			grid->getNodes()[4][0][2],
+	});
+	ghosts[5]->initPatrol(vector<Node*> {
+		grid->getNodes()[10][0][1],
+			grid->getNodes()[10][0][10],
+			grid->getNodes()[8][0][10],
+			grid->getNodes()[6][0][2],
+	});
 }
 
 void MainGame::gameLoop() {
+	drawGame();
+	Mix_PlayChannel(-1, introSound, 0);
+	SDL_Delay(4000);
 	while (gameState != GameState::EXIT) {
 		oldTime = currentTime;
 		currentTime = SDL_GetTicks();

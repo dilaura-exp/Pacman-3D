@@ -14,7 +14,7 @@ void Grid::init(float nodeRadius) {
 	this->nodeRadius = nodeRadius;
 	nodeDiameter = nodeRadius * 2;
 	loadLevel("Level.txt");
-	sphereModel = ObjectLoader::loadWavefront("pacman2.obj");
+	sphereModel = ObjectLoader::loadWavefront("Models/pacman2.obj");
 }
 
 /*
