@@ -54,7 +54,8 @@ void Grid::draw() {
 					}
 					else {
 						if (nodes[i][j][k]->obstacle) {
-							float ambdiv[]{ 0.75f, 0.25f, 0.25f, alpha };
+							//float ambdiv[]{ 0.75f, 0.25f, 0.25f, alpha };
+							float ambdiv[]{ 0.15f, 0.15f, 0.7f, alpha };
 							drawHalfCube(nodeRadius, ambdiv);
 						}
 					}

@@ -18,7 +18,7 @@ MainGame::~MainGame() {
 void MainGame::run() {
 	initSystems();
 	initGameObjects();
-	gameLoop();
+	blinkingIntro();
 }
 
 GLTexture texture;
@@ -55,8 +55,6 @@ void MainGame::initSystems() {
 	gluPerspective(45, (GLdouble)screenWidth / (GLdouble)screenHeight, 1.0, 1000.0);
 	glMatrixMode(GL_MODELVIEW);
 	glEnable(GL_DEPTH_TEST);
-	//glEnable(GL_LIGHTING);
-	//glEnable(GL_LIGHT0);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);		
 	glFogi(GL_FOG_MODE, GL_LINEAR);
@@ -65,7 +63,7 @@ void MainGame::initSystems() {
 	float color[] = { 0.5, 0.5, 0.5, 1.0 };
 	glFogfv(GL_FOG_COLOR, color);
 	
-	//glEnable(GL_COLOR_MATERIAL);
+	glEnable(GL_COLOR_MATERIAL);
 	
 	//glEnable(GL_TEXTURE_2D);
 	//texture = ImageLoader::loadPNG("brick3.png");
@@ -152,10 +150,25 @@ void MainGame::initGameObjects() {
 	});
 }
 
-void MainGame::gameLoop() {
+void MainGame::blinkingIntro() {
 	drawGame();
 	Mix_PlayChannel(-1, introSound, 0);
-	SDL_Delay(4000);
+	for (int i = 0; i < 8; i++) {
+		SDL_Delay(500);
+		if (i % 2 == 0) {
+			glEnable(GL_LIGHTING);
+			glEnable(GL_LIGHT0);
+		}
+		else {
+			glDisable(GL_LIGHTING);
+			glDisable(GL_LIGHT0);
+		}
+		drawGame();
+	}
+	gameLoop();
+}
+
+void MainGame::gameLoop() {
 	while (gameState != GameState::EXIT) {
 		oldTime = currentTime;
 		currentTime = SDL_GetTicks();

@@ -78,7 +78,6 @@ void Ghost::update(float deltaTime) {
 			}
 		}
 		else if (currentState == AIState::CHASE) {
-			cout << "CHASE" << endl;
 			path = Pathfinding::findPath(currentNode, target->getCurrentNode());
 			if (path.size() > 0) {
 				//currentNode = path[0];
